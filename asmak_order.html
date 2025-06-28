@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مطعم أسماك القرش</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background-color: #ffffff;
+      color: #333;
+    }
+    header {
+      background-color: #0288d1;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      border-bottom: 4px solid #01579b;
+    }
+    main {
+      max-width: 700px;
+      margin: auto;
+      padding: 20px;
+    }
+    section {
+      margin-bottom: 30px;
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      font-size: 20px;
+      margin-top: 0;
+      color: #00695c;
+    }
+    .item {
+      background-color: #fff3e0;
+      border: 1px solid #ffe0b2;
+      padding: 10px;
+      margin: 6px 0;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .item:hover {
+      background-color: #ffecb3;
+    }
+    label {
+      font-weight: bold;
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #ff5722;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #e64a19;
+    }
+  </style>
+</head>
+<body>
+  <header>منيو أسماك القرش</header>
+  <main>
+    <section>
+      <h2>الوجبات الفردية</h2>
+      <div class="item" onclick="addToOrder('وجبة بلطي - 90 جنيه')">وجبة بلطي - 90 جنيه</div>
+      <div class="item" onclick="addToOrder('وجبة بوري - 100 جنيه')">وجبة بوري - 100 جنيه</div>
+      <div class="item" onclick="addToOrder('وجبة جمبري - 150 جنيه')">وجبة جمبري - 150 جنيه</div>
+      <div class="item" onclick="addToOrder('وجبة كابوريا - 100 جنيه')">وجبة كابوريا - 100 جنيه</div>
+      <div class="item" onclick="addToOrder('وجبة فيليه - 100 جنيه')">وجبة فيليه - 100 جنيه</div>
+    </section>
+
+    <section>
+      <h2>السندوتشات</h2>
+      <div class="item" onclick="addToOrder('سندوتش جمبري - 25 / فينو 35')">جمبري - 25 / فينو 35</div>
+      <div class="item" onclick="addToOrder('سندوتش سيبط - 30 / فينو 40')">سيبط - 30 / فينو 40</div>
+      <div class="item" onclick="addToOrder('سندوتش كفتة جمبري - 30 / فينو 35')">كفتة جمبري - 30 / فينو 35</div>
+      <div class="item" onclick="addToOrder('سندوتش فيليه - 25 / فينو 35')">فيليه - 25 / فينو 35</div>
+    </section>
+
+    <section>
+      <h2>الأرز والإضافات</h2>
+      <div class="item" onclick="addToOrder('أرز صيادية - 30 جنيه')">أرز صيادية - 30 جنيه</div>
+      <div class="item" onclick="addToOrder('أرز بالجمبري - 60 جنيه')">أرز بالجمبري - 60 جنيه</div>
+      <div class="item" onclick="addToOrder('أرز بالكفتة والجمبري - 70 جنيه')">أرز بالكفتة والجمبري - 70 جنيه</div>
+      <div class="item" onclick="addToOrder('أرز بالكفتة والفيليه والجمبري - 90 جنيه')">أرز بالكفتة والفيليه والجمبري - 90 جنيه</div>
+      <div class="item" onclick="addToOrder('وجبة بقلاظ + عيش وطحينة - 50 جنيه')">وجبة بقلاظ + عيش وطحينة - 50 جنيه</div>
+      <div class="item" onclick="addToOrder('شوربة سي فود - 85 جنيه')">شوربة سي فود - 85 جنيه</div>
+    </section>
+
+    <section>
+      <h2>طلب أوردر</h2>
+      <label>اسمك:</label>
+      <input type="text" id="name" placeholder="اكتب اسمك هنا" required>
+      <label>رقم الموبايل:</label>
+      <input type="tel" id="phone" placeholder="اكتب رقمك" required>
+      <label>العنوان:</label>
+      <textarea id="address" rows="2" placeholder="اكتب العنوان بالتفصيل" required></textarea>
+      <label>تفاصيل الطلب:</label>
+      <textarea id="order" rows="5" placeholder="الأصناف المختارة ستُدرج هنا تلقائيًا..." required></textarea>
+      <button onclick="submitOrder()">إرسال الطلب على واتساب</button>
+    </section>
+  </main>
+
+  <script>
+    function addToOrder(item) {
+      const orderField = document.getElementById('order');
+      orderField.value += item + '\n';
+    }
+    function submitOrder() {
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+      const address = document.getElementById('address').value;
+      const order = document.getElementById('order').value;
+
+      const message = `*طلب جديد من موقع أسماك القرش*\n\n👤 الاسم: ${name}\n📞 الموبايل: ${phone}\n📍 العنوان: ${address}\n🍤 الطلب:\n${order}`;
+      const whatsappURL = `https://wa.me/201006609085?text=${encodeURIComponent(message)}`;
+      window.open(whatsappURL, '_blank');
+    }
+  </script>
+</body>
+</html>
